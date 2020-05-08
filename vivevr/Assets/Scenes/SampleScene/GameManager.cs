@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using Valve.VR.InteractionSystem;
 public class GameManager : MonoBehaviour
 {
@@ -9,7 +10,15 @@ public class GameManager : MonoBehaviour
     [Header("分數")]
     public Text scoretext;
     private int score;
-
+    private Threepoint threepoint;
+    [Header("音效")]
+    public AudioClip music;
+    private AudioSource aut;
+    private void Start()
+    {
+        aut = GetComponent<AudioSource>();
+        threepoint = FindObjectOfType<Threepoint>();
+    }
     public void Useball(GameObject ball) {
         Destroy(ball.GetComponent<Throwable>());
         Destroy(ball.GetComponent<Interactable>());
@@ -18,7 +27,23 @@ public class GameManager : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        score += 2;
+        if (threepoint.inthreepoint)
+        {
+            score += 3;
+        }
+        else
+        {
+            score += 2;
+        }
         scoretext.text = "分數" + score;
+    }
+    public void Replay()
+    {
+        SceneManager.LoadScene("viver");
+    }
+    public void Quit()
+    {
+        Application.Quit();
+        
     }
 }
