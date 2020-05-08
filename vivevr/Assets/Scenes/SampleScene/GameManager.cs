@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     }
     public void Replay()
     {
+        Destroy(FindObjectOfType<Player>().gameObject);
         SceneManager.LoadScene("viver");
     }
     public void Quit()
