@@ -8,24 +8,22 @@ public class GameManager : MonoBehaviour
     public Text ballcounttext;
     private int ballcount = 10;
     public Text scoretext;
-    [Header("音效")]
-    public AudioClip music;
-    private AudioSource aut;
 
-    private void Start()
-    {
-        aut = GetComponent<AudioSource>();
-    }
     public void Useball(GameObject ball) {
         Destroy(ball.GetComponent<Throwable>());
         Destroy(ball.GetComponent<Interactable>());
         ballcount--;
         ballcounttext.text = "飛鏢數量" + ballcount + "/10";
     }
-    public void Replay()
+    public void Replay1()
     {
         Destroy(FindObjectOfType<Player>().gameObject);
         SceneManager.LoadScene("viver");
+    }
+    public void Replay2()
+    {
+        Destroy(FindObjectOfType<Player>().gameObject);
+        SceneManager.LoadScene("viver2");
     }
     public void Quit()
     {

@@ -53,7 +53,9 @@ namespace Valve.VR.InteractionSystem
         public UnityEvent onDetachFromHand;
         public HandEvent onHeldUpdate;
 
-
+        [Header("音效")]
+        public AudioClip shou;
+        private AudioSource aut;
         protected RigidbodyInterpolation hadInterpolation = RigidbodyInterpolation.None;
 
         protected new Rigidbody rigidbody;
@@ -61,7 +63,11 @@ namespace Valve.VR.InteractionSystem
         [HideInInspector]
         public Interactable interactable;
 
+        private void Start()
+        {
 
+            aut = GetComponent<AudioSource>();
+        }
         //-------------------------------------------------
         protected virtual void Awake()
 		{
@@ -145,7 +151,6 @@ namespace Valve.VR.InteractionSystem
 			onPickUp.Invoke();
 
 			hand.HoverLock( null );
-
             rigidbody.interpolation = RigidbodyInterpolation.None;
 
             if (velocityEstimator != null)
@@ -166,7 +171,7 @@ namespace Valve.VR.InteractionSystem
             onDetachFromHand.Invoke();
 
             hand.HoverUnlock(null);
-
+            aut.PlayOneShot(shou, 0.5f);
             rigidbody.interpolation = hadInterpolation;
 
             Vector3 velocity;
@@ -276,7 +281,8 @@ namespace Valve.VR.InteractionSystem
 
             if (velocityEstimator != null)
                 velocityEstimator.FinishEstimatingVelocity();
-		}
+        }
+       
 	}
 
     public enum ReleaseStyle
