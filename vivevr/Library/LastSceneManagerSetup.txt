@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/viver.unity
+- path: Assets/Scenes/viver2.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
